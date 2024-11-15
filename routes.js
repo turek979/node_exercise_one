@@ -6,16 +6,17 @@ function requestHandler(request, response) {
   let tableOfUsers = "";
 
   if (url === "/") {
+    response.setHeader("Content-Type", "text/html");
     response.write(`
             <html> 
                 <head>
                     <title>Greetings</title>
                 </head>
                 <body>
-                <h1 style="text-align: center">Greetings on my exercise!</h1></br></br>
-                <div style="text-align: center">
-                <form action="/create-user" method="POST"><input type="text" name="new_user"><button type="submit">Send</button></form>
-                </div>
+                    <h1 style="text-align: center">Greetings on my exercise!</h1></br></br>
+                    <div style="text-align: center">
+                    <form action="/create-user" method="POST"><input type="text" name="new_user"><button type="submit">Send</button></form>
+                    </div>
                 </body>
             </html>
             `);
@@ -26,6 +27,7 @@ function requestHandler(request, response) {
       tableOfUsers = tableOfUsers + `<li>${listOfUsers[i]}</li>`;
       //   console.log(tableOfUsers);
     }
+    response.setHeader("Content-Type", "text/html");
     response.write(`
             <html>
                 <head>
@@ -54,6 +56,14 @@ function requestHandler(request, response) {
       return response.end();
     });
   }
+  response.setHeader("Content-Type", "text/html");
+  response.write(`
+        <html>
+            <head><title>Page not found</title></head>
+            <body><h1 style="text-align: center; padding: 70px 0;">The page was not found!</h1></body>
+        </html>
+    `);
+  response.end();
 }
 
 module.exports = {
